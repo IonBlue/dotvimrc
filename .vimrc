@@ -54,7 +54,7 @@ if version >= 500
 
 endif
 
-"Automatic installation of vim-plug and auto instalation of plugins curl
+"Automatic installation of vim-plug
 "library needed
 
 " Install vim-plug if not found
@@ -63,10 +63,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
-" Run PlugInstall if there are missing plugins
-if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
 
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
@@ -78,6 +74,12 @@ Plug 'morhetz/gruvbox'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
+
+" Run PlugInstall if there are missing plugins
+if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 "Set dark mode
 set bg=dark
 "Change the contrast of the theme
